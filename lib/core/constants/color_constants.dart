@@ -7,4 +7,5 @@ class ColorConstants {
   static const Color grey9b9b = Color(0xff9b9b9b);
   static const Color greyf2f2f2 = Color(0xfff2f2f2);
   static const Color greyeeee = Color(0xffefeeee);
+  static const Color transparent = Colors.transparent;
 }

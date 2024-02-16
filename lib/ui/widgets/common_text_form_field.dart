@@ -3,24 +3,28 @@ import 'package:getx_food_app/core/constants/color_constants.dart';
 import 'package:getx_food_app/core/constants/text_styles.dart';
 
 class TextFormFieldWidget extends StatelessWidget {
-  const TextFormFieldWidget({
-    Key? key,
-    required this.labelText,
-    this.controller,
-    this.obscureText = false,
-    required this.onChanged,
-  }) : super(key: key);
+  const TextFormFieldWidget(
+      {Key? key,
+      required this.labelText,
+      this.controller,
+      this.obscureText = false,
+      required this.onChanged,
+      this.validator})
+      : super(key: key);
 
   final String labelText;
   final TextEditingController? controller;
   final bool obscureText;
   final Function(String) onChanged;
+  final FormFieldValidator? validator;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       controller: controller,
       obscureText: obscureText,
+      autovalidateMode: AutovalidateMode.onUserInteraction,
+      validator: validator,
       cursorColor: ColorConstants.black,
       onChanged: onChanged,
       style: TextStyles.textStyleFont17Weight600.copyWith(

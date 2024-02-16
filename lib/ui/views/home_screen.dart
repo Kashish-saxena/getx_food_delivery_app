@@ -5,11 +5,12 @@ import 'package:getx_food_app/core/constants/image_constants.dart';
 import 'package:getx_food_app/core/constants/string_constants.dart';
 import 'package:getx_food_app/core/constants/text_styles.dart';
 import 'package:getx_food_app/core/models/food_menu_model.dart';
+import 'package:getx_food_app/core/routing/routes.dart';
 import 'package:getx_food_app/core/view_model/home_view_model.dart';
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
-  final HomeViewModel homeViewModel = Get.put(HomeViewModel());
+  final HomeViewModel homeViewModel = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -28,36 +29,38 @@ class HomeScreen extends StatelessWidget {
 
   Widget buildBody() {
     return SafeArea(
-      child: Column(
-        children: [
-          Container(
-            margin: const EdgeInsets.symmetric(horizontal: 40, vertical: 40),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Image.asset(ImageConstants.menu),
-                    Image.asset(ImageConstants.cart),
-                  ],
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                const Text(
-                  StringConstants.delicious,
-                  style: TextStyles.textStyleFont34Weight700,
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                buildSearch(),
-              ],
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            Container(
+              margin: const EdgeInsets.symmetric(horizontal: 40, vertical: 40),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Image.asset(ImageConstants.menu),
+                      Image.asset(ImageConstants.cart),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  const Text(
+                    StringConstants.delicious,
+                    style: TextStyles.textStyleFont34Weight700,
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  buildSearch(),
+                ],
+              ),
             ),
-          ),
-          buildTabBar(),
-        ],
+            buildTabBar(),
+          ],
+        ),
       ),
     );
   }
@@ -89,7 +92,7 @@ class HomeScreen extends StatelessWidget {
           indicatorSize: TabBarIndicatorSize.tab,
           indicatorWeight: 3,
           indicatorColor: ColorConstants.orange4b3a,
-          dividerColor: Colors.transparent,
+          dividerColor: ColorConstants.transparent,
           labelStyle: TextStyles.textStyleFont17Weight400
               .copyWith(color: ColorConstants.orange4b3a),
           tabs: const [
@@ -127,52 +130,59 @@ class HomeScreen extends StatelessWidget {
                 scrollDirection: Axis.horizontal,
                 itemCount: foodMenu.length,
                 itemBuilder: (context, index) {
-                  FoodMenu menu = foodMenu[index];
-                  return Container(
-                    margin: const EdgeInsets.only(right: 20),
-                    child: Stack(
-                      children: [
-                        Positioned(
-                          top: 50,
-                          child: Container(
-                            margin: const EdgeInsets.symmetric(horizontal: 5),
-                            padding: const EdgeInsets.symmetric(horizontal: 40),
-                            height: 250,
-                            width: 200,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(30),
-                                color: ColorConstants.white,
-                                boxShadow: const [
-                                  BoxShadow(
-                                      color: ColorConstants.greyeeee,
-                                      spreadRadius: 10,
-                                      blurRadius: 5,
-                                      offset: Offset(0, 7))
-                                ]),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                Text(
-                                  menu.name,
-                                  textAlign: TextAlign.center,
-                                  style: TextStyles.textStyleFont17Weight600
-                                      .copyWith(color: ColorConstants.black),
-                                ),
-                                const SizedBox(height: 10),
-                                Text(
-                                  menu.price,
-                                  style: TextStyles.textStyleFont17Weight600
-                                      .copyWith(
-                                          color: ColorConstants.orange4b3a),
-                                ),
-                                const SizedBox(height: 30),
-                              ],
+                  FoodMenu foodMenuDetails = foodMenu[index];
+                  return InkWell(
+                    onTap: () => Get.toNamed(
+                      Routes.foodDetailScreen,
+                      arguments: foodMenuDetails,
+                    ),
+                    child: Container(
+                      margin: const EdgeInsets.only(right: 20),
+                      child: Stack(
+                        children: [
+                          Positioned(
+                            top: 50,
+                            child: Container(
+                              margin: const EdgeInsets.symmetric(horizontal: 5),
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 40),
+                              height: 250,
+                              width: 200,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(30),
+                                  color: ColorConstants.white,
+                                  boxShadow: const [
+                                    BoxShadow(
+                                        color: ColorConstants.greyeeee,
+                                        spreadRadius: 10,
+                                        blurRadius: 5,
+                                        offset: Offset(0, 7))
+                                  ]),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  Text(
+                                    foodMenuDetails.name,
+                                    textAlign: TextAlign.center,
+                                    style: TextStyles.textStyleFont17Weight600
+                                        .copyWith(color: ColorConstants.black),
+                                  ),
+                                  const SizedBox(height: 10),
+                                  Text(
+                                    foodMenuDetails.price,
+                                    style: TextStyles.textStyleFont17Weight600
+                                        .copyWith(
+                                            color: ColorConstants.orange4b3a),
+                                  ),
+                                  const SizedBox(height: 30),
+                                ],
+                              ),
                             ),
                           ),
-                        ),
-                        Image.asset(menu.image)
-                      ],
+                          Image.asset(foodMenuDetails.image)
+                        ],
+                      ),
                     ),
                   );
                 }),

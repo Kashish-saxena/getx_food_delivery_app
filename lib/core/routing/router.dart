@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:getx_food_app/core/models/food_menu_model.dart';
 import 'package:getx_food_app/core/routing/routes.dart';
 import 'package:getx_food_app/ui/views/food_detail_screen.dart';
 import 'package:getx_food_app/ui/views/home_screen.dart';
@@ -13,14 +14,14 @@ class PageRoutes {
       case Routes.homeScreen:
         return MaterialPageRoute(builder: (context) => HomeScreen());
       case Routes.foodDetailScreen:
+        FoodMenu foodMenu = settings.arguments as FoodMenu;
         return MaterialPageRoute(
-            builder: (context) => const FoodDetailScreen());
+            builder: (context) => FoodDetailScreen(foodMenu: foodMenu));
+
+      case Routes.signInSignUpScreen:
+        return MaterialPageRoute(builder: (context) => SignInSignUpScreen());
       // case Routes.registerScreen:
       //   return MaterialPageRoute(builder: (context) => const RegisterationScreen());
-      case Routes.signInSignUpScreen:
-        return MaterialPageRoute(
-            builder: (context) => const SignInSignUpScreen());
-
       // case Routes.loginScreen:
       //   return MaterialPageRoute(builder: (context) => const LoginScreen());
       default:

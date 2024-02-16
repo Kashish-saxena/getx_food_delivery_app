@@ -18,8 +18,23 @@ class StringConstants {
   static const String delivery = "Delivery info";
   static const String policy = "Return policy";
   static const String cart = "Add to cart";
+  static const String name = "Name";
+  static const String gender = "Gender";
+  static const String male = "male";
+  static const String female = "female";
+  static const String alreadyExist = "User with same email already exists";
+  static const String userRegistered = "User Registered";
+  static const String userNotRegistered = "User Not Registered";
+  static const String registerConfirmation = "Register Confirmation";
+  static const String enterDetails = "Please enter the details";
+  static const String loginConfirmation = "Login Confirmation";
+  static const String enterloginDetails = "Please enter email and password";
+  static const String enterloginCorrectDetails =
+      "Please enter correct email and password";
+  static const String correctPassword = "Please enter correct password";
   static const String deliveryInfo =
       "Delivered between monday aug and thursday 20 from 8pm to 91:32 pm";
+  static const String active = "Active";
   static const String policyDescription =
       "All our foods are double checked before leaving our stores so by any case you found a broken food please contact our hotline immediately.";
 }
