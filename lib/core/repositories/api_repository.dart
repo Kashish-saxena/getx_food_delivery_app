@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:get/get.dart';
 import 'package:getx_food_app/core/models/signup_request_model.dart';
 
@@ -19,10 +21,10 @@ class ApiRepository extends GetConnect {
             "Authorization":
                 "Bearer a9a486e9e05ae8f3998761fba962fa5c8bdfd58b227d425373b4566717afd33c"
           });
+      log("${response.statusCode}");
       return response;
     } catch (e) {
-      // Exception occurred
-      throw Exception("Failed to create user: $e");
+      return const Response<SignUpRequestModel>(statusCode: 500);
     }
   }
 }

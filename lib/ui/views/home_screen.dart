@@ -1,27 +1,36 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:getx_food_app/core/constants/color_constants.dart';
 import 'package:getx_food_app/core/constants/image_constants.dart';
 import 'package:getx_food_app/core/constants/string_constants.dart';
 import 'package:getx_food_app/core/constants/text_styles.dart';
 import 'package:getx_food_app/core/models/food_menu_model.dart';
+import 'package:getx_food_app/core/persistence/get_storage.dart';
 import 'package:getx_food_app/core/routing/routes.dart';
 import 'package:getx_food_app/core/view_model/home_view_model.dart';
 
+// ignore: must_be_immutable
 class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
-  final HomeViewModel homeViewModel = Get.find();
-
+  HomeViewModel homeViewModel = Get.find();
+  GetStorageBox storage = GetStorageBox.instance;
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: 4,
-      child: Scaffold(
-        extendBody: true,
-        backgroundColor: ColorConstants.greyf2f2f2,
-        body: buildBody(),
-        bottomNavigationBar: Obx(
-          () => buildBottomNavigation(),
+    return PopScope(
+      canPop: true,
+      onPopInvoked: (didPop) {
+          SystemNavigator.pop();
+      },
+      child: DefaultTabController(
+        length: 4,
+        child: Scaffold(
+          extendBody: true,
+          backgroundColor: ColorConstants.greyf2f2f2,
+          body: buildBody(),
+          bottomNavigationBar: Obx(
+            () => buildBottomNavigation(),
+          ),
         ),
       ),
     );
@@ -41,7 +50,13 @@ class HomeScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Image.asset(ImageConstants.menu),
-                      Image.asset(ImageConstants.cart),
+                      Row(children: [TextButton(style: TextButton.styleFrom(foregroundColor: ColorConstants.orange4b3a),
+                        onPressed: (){
+                          homeViewModel.removeUser();
+                          storage.setIsLogin("false");
+                          Get.toNamed(Routes.signInSignUpScreen);
+                        }, child: const Text(StringConstants.logout,style: TextStyles.textStyleFont17Weight400,)),Image.asset(ImageConstants.cart),],
+                      )
                     ],
                   ),
                   const SizedBox(

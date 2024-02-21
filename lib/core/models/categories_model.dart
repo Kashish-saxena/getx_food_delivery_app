@@ -3,7 +3,7 @@ class Categories {
   Categories(this.name);
 }
 
-List categories = [
+List<Categories> categories = [
   Categories("Foods"),
   Categories("Drinks"),
   Categories("Snacks"),

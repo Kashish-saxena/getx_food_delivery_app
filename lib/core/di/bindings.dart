@@ -14,13 +14,12 @@
 import 'package:get/get.dart';
 import 'package:getx_food_app/core/repositories/api_repository.dart';
 import 'package:getx_food_app/core/view_model/home_view_model.dart';
-import 'package:getx_food_app/ui/views/sign_in_sign_up_screen.dart';
-
+import 'package:getx_food_app/core/view_model/sign_in_sign_up_view_model.dart';
 class AppBindings implements Bindings {
   @override
   void dependencies() {
-    Get.lazyPut(() => ApiRepository());
-    Get.lazyPut(() => HomeViewModel());
-    Get.lazyPut(() => SignInSignUpScreen());
+    Get.put(ApiRepository());
+    Get.put(HomeViewModel());
+    Get.put(SignInSignUpViewModel());
   }
 }

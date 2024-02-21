@@ -42,8 +42,7 @@ class FoodDetailScreen extends StatelessWidget {
             ),
             const SizedBox(height: 20),
             Center(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
+              child: Stack(
                 children: [
                   SizedBox(
                     height: 300,
@@ -53,13 +52,18 @@ class FoodDetailScreen extends StatelessWidget {
                       fit: BoxFit.cover,
                     ),
                   ),
-                  Text(foodMenu.name,
-                      style: TextStyles.textStyleFont34Weight700
-                          .copyWith(fontSize: 25)),
-                  const SizedBox(height: 5),
-                  Text(foodMenu.price,
-                      style: TextStyles.textStyleFont34Weight700.copyWith(
-                          color: ColorConstants.orange4b3a, fontSize: 25)),
+                  Positioned(
+                    bottom: 10,
+                    left: 10,
+                    right: 10,
+                    child: Column(children: [Text(foodMenu.name,
+                        style: TextStyles.textStyleFont34Weight700
+                            .copyWith(fontSize: 25)),
+                    const SizedBox(height: 5),
+                    Text(foodMenu.price,
+                        style: TextStyles.textStyleFont34Weight700.copyWith(
+                            color: ColorConstants.orange4b3a, fontSize: 25)),],),
+                  ),
                 ],
               ),
             ),
@@ -93,7 +97,7 @@ class FoodDetailScreen extends StatelessWidget {
                 ],
               ),
             ),
-            const SizedBox(height: 30),
+            const SizedBox(height: 100),
             Center(
               child: Container(
                 width: MediaQuery.of(context).size.width,

@@ -10,7 +10,7 @@ class PageRoutes {
   static Route<dynamic> generateRoutes(RouteSettings settings) {
     switch (settings.name) {
       case Routes.welcomeScreen:
-        return MaterialPageRoute(builder: (context) => const WelcomeScreen());
+        return MaterialPageRoute(builder: (context) => WelcomeScreen());
       case Routes.homeScreen:
         return MaterialPageRoute(builder: (context) => HomeScreen());
       case Routes.foodDetailScreen:

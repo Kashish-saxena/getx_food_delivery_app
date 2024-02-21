@@ -22,6 +22,7 @@ class StringConstants {
   static const String gender = "Gender";
   static const String male = "male";
   static const String female = "female";
+  static const String logout = "Logout";
   static const String alreadyExist = "User with same email already exists";
   static const String userRegistered = "User Registered";
   static const String userNotRegistered = "User Not Registered";
